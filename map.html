@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Map API範例</title>
+    
+    <style>
+        #map{
+            width: 80%;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy5_SjUbRXayyiYVb9QaQSlRUW6CSM5Io&callback=initMap"></script>
+    <script>
+        // Initialize and add the map
+            function initMap() {
+                // The location of Uluru
+                const ntnu = { lat: 25.026884965492172, lng: 121.52759131417416  };
+                // The map, centered at Uluru
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 20,
+                    center: ntnu,
+                });
+                // The marker, positioned at Uluru
+                const img = 'img/placeholder.png'
+                const marker = new google.maps.Marker({
+                    position: ntnu,
+                    map: map,
+                    title: "師大",
+                    icon:img
+                });
+                const infowindow = new google.maps.InfoWindow({
+                    content: "<h3>師大</h3><p style='padding:10;'>其實這裡是圖書館校區喔</p>",
+                    ariaLabel: "師大",
+                });
+                marker.addListener("click", () => {
+                    infowindow.open({
+                    anchor: marker,
+                    map,
+                    });
+                });
+            }
+
+            window.initMap = initMap;
+    </script>
+</body>
+</html>

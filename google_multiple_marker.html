@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google API 叢集標記</title>
+  <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmsExZoA1swmtgNOYJCsVaeGMyEVne2tE&callback=initMap"></script>
+  <style>
+    #map {
+      width: 800px;
+      height: 500px;
+      margin: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script>
+    function initMap() {
+      const ntnu = {
+        lat: 25.0258512661923, lng: 121.52760449769069
+      };
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 18,
+        center: ntnu,
+      });
+      const img = "img/placeholder.png";
+
+      for (let i = 0; i < locations.length; i++) {
+        const marker = new google.maps.Marker({
+          position: locations[i],
+          map: map,
+          title: "地點" + (i + 1),
+          icon: img,
+        });
+        const infowindow = new google.maps.InfoWindow({
+          content: pos_name[i],
+          arialLabel: "地點" + (i + 1),
+        });
+        marker.addListener("click", () => {
+          infowindow.open({
+            anchor: marker,
+            map,
+          });
+        });
+      }
+    }
+    const pos_name = ["臺灣師範大學禮堂","臺灣師大體育館", "維也納森林", "臺北師大郵局", "SECOND FLOOR CAFE 貳樓師大", "師大美術系館", "國立臺灣師範大學校本部游泳館", "國立臺灣師範大學文學院", "國立臺灣師範大學圖書館"]
+    const locations = [
+      { lat: 25.02627285995215, lng: 121.52673812177211 },
+      { lat: 25.025967568063404, lng: 121.52656163778056, },
+      { lat: 25.0258512661923, lng: 121.52760449769069 },
+      { lat: 25.02598574022079, lng: 121.52835455462608 },
+      { lat: 25.025505994363204, lng: 121.52827834563264 },
+      { lat: 25.02622757479932, lng: 121.52865379517687 },
+      { lat: 25.025284721798894, lng: 121.52613314128138 },
+      { lat: 25.025003136305124, lng: 121.52732290310593 },
+      { lat: 25.027217687721425, lng: 121.52845052856405 },
+    ];
+
+    // 載入地圖
+    initMap();
+  </script>
+</body>
+
+</html>
